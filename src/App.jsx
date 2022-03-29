@@ -1,29 +1,14 @@
-import logo from "./logo.svg";
+import { Grid } from "./components/grid";
 import "./App.css";
+import "./styles/grid.css";
+import SutomProvider from "./states/sutomProvider.jsx";
 
 function App() {
-  var lengthWord = 8;
-  var words = require("an-array-of-french-words").filter(
-    (d) => d.length === lengthWord
-  );
-
-  var choosenWord = words[Math.floor(Math.random() * words.length)];
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{choosenWord}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SutomProvider>
+      <div className="nav">T U S M O</div>
+      <Grid />;
+    </SutomProvider>
   );
 }
 

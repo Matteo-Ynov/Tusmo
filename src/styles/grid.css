@@ -1,0 +1,30 @@
+.case {
+    border: 1px solid white;
+    background-color: black;
+    width: 80px;
+    height: 80px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    margin: 0;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+}
+
+.nav {
+    font-size: 60px;
+    padding: 10px;
+    color: white;
+    border-bottom: 2px solid white;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
