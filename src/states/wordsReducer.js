@@ -29,7 +29,7 @@ export const wordsReducer = (state, action) => {
                 wordToFind: action.payload,
             };
         case TYPE:
-            console.log(state.currentTry);
+            console.log(action.payload);
             if (
                 ALPHABET.includes(action.payload) &&
                 state.currentTry.length < state.wordLength
@@ -48,7 +48,13 @@ export const wordsReducer = (state, action) => {
                 state.currentTry.length > 0
             ) {
                 state.currentTry = state.currentTry.slice(0, -1);
+            } else if (
+                action.payload === "enter" &&
+                state.currentTry.length === state.wordLength
+            ) {
+                alert("RIP BOZO");
             }
+
             return {
                 ...state,
             };
