@@ -2,10 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  var lengthWord = 8;
-  var words = require("an-array-of-french-words").filter(
-    (d) => d.length === lengthWord
-  );
 
   var choosenWord = words[Math.floor(Math.random() * words.length)];
 
