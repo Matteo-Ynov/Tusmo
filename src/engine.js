@@ -48,11 +48,11 @@ function joinCorrectAndMisplacedLetters(
     input = input.split("");
     for (let i = 0; i < input.length; i++) {
         if (correct_letters[i] === true) {
-            list.push((input[i], "Well placed"));
+            list.push((input[i], "well-placed"));
         } else if (misplaced_letters[i] === true) {
-            list.push((input[i], "Misplaced"));
+            list.push((input[i], "misplaced"));
         } else {
-            list.push((input[i], "None"));
+            list.push((input[i], ""));
         }
     }
     console.log(list);

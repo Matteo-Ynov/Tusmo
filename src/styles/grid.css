@@ -1,6 +1,5 @@
 .case {
     border: 1px solid white;
-    background-color: black;
     width: 80px;
     height: 80px;
     color: white;
@@ -9,6 +8,22 @@
     align-items: center;
     font-size: 50px;
     margin: 0;
+    position: relative;
+}
+
+.well-placed {
+    background-color: red;
+}
+
+.misplaced::after {
+    content: "";
+    color: orange;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: orange;
+    position: absolute;
+    z-index: -1;
 }
 
 .row {
@@ -16,6 +31,7 @@
     justify-content: center;
     align-items: center;
     flex-flow: row;
+    position: relative;
 }
 
 .nav {
@@ -27,4 +43,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.panel {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
 }
