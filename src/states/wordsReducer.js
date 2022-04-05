@@ -7,8 +7,12 @@ export const RESET = "RESET";
 
 const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
-var lengthWord = 6;
+var lengthWord = randomNum(5, 10);
 var words = wordList[lengthWord];
+
+function randomNum(min, max) {
+	return Math.floor(Math.random() * (max - min)) + min;
+}
 
 const generateNewState = () => {
     var choosenWord = words[Math.floor(Math.random() * words.length)]
