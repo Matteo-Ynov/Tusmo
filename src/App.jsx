@@ -1,3 +1,4 @@
+import React from "react";
 import { Grid } from "./components/grid";
 import "./App.css";
 import "./styles/grid.css";

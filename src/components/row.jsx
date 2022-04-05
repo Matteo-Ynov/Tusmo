@@ -12,6 +12,8 @@ export const Row = ({ word, id }) => {
         : " ".repeat(state.wordLength);
   }
 
+  const hints = state.hints[id] ? state.hints[id] : ["None"];
+
   const fillSpaces = (word) => {
     return word + " ".repeat(state.wordLength - word.length);
   };

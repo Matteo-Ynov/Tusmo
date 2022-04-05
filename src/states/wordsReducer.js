@@ -1,4 +1,5 @@
 import wordList from "../assets/words.json";
+import { checkIfWordExist, getHints } from "../engine.js";
 
 export const SET_WORD_TO_FIND = "SET_WORD_TO_FIND";
 export const TYPE = "TYPE";
@@ -16,6 +17,7 @@ var choosenWord = words[Math.floor(Math.random() * words.length)]
 export const initialState = {
     wordToFind: choosenWord,
     tries: [],
+    hints: [],
     currentTry: "",
     letterPlacement: choosenWord[0] + ".".repeat(choosenWord.length - 1),
     wordLength: choosenWord.length,
@@ -29,7 +31,6 @@ export const wordsReducer = (state, action) => {
                 wordToFind: action.payload,
             };
         case TYPE:
-            console.log(action.payload);
             if (
                 ALPHABET.includes(action.payload) &&
                 state.currentTry.length < state.wordLength
@@ -52,7 +53,12 @@ export const wordsReducer = (state, action) => {
                 action.payload === "enter" &&
                 state.currentTry.length === state.wordLength
             ) {
-                alert("RIP BOZO");
+                state.tries.push(state.currentTry);
+                state.hints.push(getHints(state.wordToFind, state.currentTry));
+                state.currentTry = "";
+                // checkIfWordExist(state.currentTry).then((res) => {
+                //     console.log(res);
+                // });
             }
 
             return {

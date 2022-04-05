@@ -30,7 +30,11 @@ export const Grid = () => {
         .map((_, i) => {
           return (
             <Row
-              word={state.tries[i] ?? " ".repeat(state.wordToFind.length)}
+              word={
+                state.tries[i]
+                  ? state.tries[i]
+                  : " ".repeat(state.wordToFind.length)
+              }
               key={i}
               id={i}
             />
