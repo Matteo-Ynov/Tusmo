@@ -69,3 +69,21 @@ export const checkIfWordExist = (input) => {
         });
     });
 };
+
+export function createhintsarray(hints) {
+    let hintsarray = []
+    for (const hint of hints) {
+      let show = ""
+      for (const value of hint) {
+        if (value === "well-placed") {
+          show += "🟥"
+        } else if (value="misplaced") {
+          show += "🟠"
+        } else {
+          show += "⚫"
+        }
+      }
+      hintsarray.push(show)
+    }
+    return hintsarray
+  }

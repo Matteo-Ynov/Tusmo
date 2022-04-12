@@ -11,5 +11,12 @@ h1 {
 
 .tries{
   text-align: center;
-  margin-bottom: -20px;
+}
+
+.try{
+  margin: 0;
+}
+
+.end-game-state{
+  font-size: 60px;
 }

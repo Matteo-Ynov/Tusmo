@@ -1,45 +1,30 @@
 import React, { useContext } from "react";
-import { RESET } from "../states/wordsReducer";
 import { Link } from "react-router-dom";
 import { SutomContext } from "../states/sutomProvider";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {createhintsarray} from '../engine'
 
 const WinPanel = () => {
-  const [state, dispatch] = useContext(SutomContext);
-  createhintsarray(state.hints);
+  const [state] = useContext(SutomContext);
+  let hintsarray = createhintsarray(state.hints);
   return (
     <div className="panel">
-      <h1>V I C T O R Y</h1>
+      <h1 className="end-game-state">V I C T O I R E</h1>
+      <CopyToClipboard text={hintsarray.join("\n")}>
+          <button class="btn btn-white btn-small">Copier dans le presse-papier</button>
+        </CopyToClipboard>
       <h1 className="tries">{
-        createhintsarray(state.hints).map(e => <p>{e}</p>)
+        hintsarray.map(e => <p className="try">{e}</p>)
       }</h1>
       <Link
         class="btn btn-white btn-big"
         onClick={() => window.location.reload()}
         to="/game"
       >
-        Play Again
+        Rejouer
       </Link>
     </div>
   );
 };
-
-
-function createhintsarray(hints) {
-  let hintsarray = []
-  for (const hint of hints) {
-    let show = ""
-    for (const value of hint) {
-      if (value == "well-placed") {
-        show += "🟥"
-      } else if (value == "misplaced") {
-        show += "🟠"
-      } else {
-        show += "⚫"
-      }
-    }
-    hintsarray.push(show)
-  }
-  return hintsarray
-}
 
 export default WinPanel;

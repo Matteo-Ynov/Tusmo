@@ -1,5 +1,5 @@
 import { SutomContext } from "../states/sutomProvider";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 export const Row = ({ word, id }) => {
   const [state] = useContext(SutomContext);

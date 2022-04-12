@@ -67,7 +67,7 @@ export const wordsReducer = (state, action) => {
                 state.tries.push(state.currentTry);
                 state.hints.push(getHints(state.wordToFind, state.currentTry));
                 for (let i = 0; i < state.hints[state.hints.length - 1].length; i++) {
-                    if (state.hints[state.hints.length - 1][i] == "well-placed") {
+                    if (state.hints[state.hints.length - 1][i] === "well-placed") {
                         state.letterPlacement = state.letterPlacement.split("");
                         state.letterPlacement[i] = state.wordToFind[i];
                         state.letterPlacement = state.letterPlacement.join("");
