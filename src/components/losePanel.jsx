@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { SutomContext } from "../states/sutomProvider";
 
 const LosePanel = () => {
   return (
