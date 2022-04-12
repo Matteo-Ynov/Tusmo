@@ -7,6 +7,8 @@ import { TYPE } from "../states/wordsReducer";
 import WinPanel from "../components/winPanel";
 import LosePanel from "../components/losePanel";
 
+import { checkIfWordExist } from "../engine";
+
 export const Grid = () => {
   const [pressed, setPressed] = useState(0);
   const [state, dispatch] = useContext(SutomContext);
@@ -19,6 +21,7 @@ export const Grid = () => {
         payload: event.key.toLowerCase(),
       });
     }
+    console.log(checkIfWordExist(state.currentTry, state.currentTry));
   };
   console.log(state.wordToFind);
 

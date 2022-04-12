@@ -1,3 +1,5 @@
+import { readFileSync } from "fs";
+
 export function getHints(word, input) {
     let [correct_letters, changed_word] = checkCorrectLetters(word, input);
     let misplaced_letters = checkMisplacedLetters(changed_word, input);
@@ -71,19 +73,19 @@ export const checkIfWordExist = (input) => {
 };
 
 export function createhintsarray(hints) {
-    let hintsarray = []
+    let hintsarray = [];
     for (const hint of hints) {
-      let show = ""
-      for (const value of hint) {
-        if (value === "well-placed") {
-          show += "🟥"
-        } else if (value="misplaced") {
-          show += "🟠"
-        } else {
-          show += "⚫"
+        let show = "";
+        for (const value of hint) {
+            if (value === "well-placed") {
+                show += "🟥";
+            } else if ((value = "misplaced")) {
+                show += "🟠";
+            } else {
+                show += "⚫";
+            }
         }
-      }
-      hintsarray.push(show)
+        hintsarray.push(show);
     }
-    return hintsarray
-  }
+    return hintsarray;
+}

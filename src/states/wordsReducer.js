@@ -11,7 +11,7 @@ var lengthWord = randomNum(5, 10);
 var words = wordList[lengthWord];
 
 function randomNum(min, max) {
-	return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 const generateNewState = () => {
