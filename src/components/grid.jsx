@@ -2,7 +2,7 @@ import { Row } from "./row";
 import React, { useContext, useEffect, useState } from "react";
 
 import { SutomContext } from "../states/sutomProvider";
-import { TYPE } from "../states/wordsReducer";
+import { TYPE, CONFIRM } from "../states/wordsReducer";
 
 import WinPanel from "../components/winPanel";
 import LosePanel from "../components/losePanel";
@@ -16,14 +16,27 @@ export const Grid = () => {
   const keyDown = (event) => {
     if (state.won === undefined) {
       setPressed(pressed + 1);
-      dispatch({
-        type: TYPE,
-        payload: event.key.toLowerCase(),
-      });
+
+      if (
+        event.key.toLowerCase() === "enter" &&
+        state.currentTry.length === state.wordLength
+      ) {
+        checkIfWordExist(state.currentTry).then((res) => {
+          console.log(res);
+          if (res) {
+            dispatch({
+              type: CONFIRM,
+            });
+          }
+        });
+      } else {
+        dispatch({
+          type: TYPE,
+          payload: event.key.toLowerCase(),
+        });
+      }
     }
-    console.log(checkIfWordExist(state.currentTry, state.currentTry));
   };
-  console.log(state.wordToFind);
 
   useEffect(() => {
     window.addEventListener("keydown", keyDown);

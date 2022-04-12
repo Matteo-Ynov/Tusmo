@@ -4,6 +4,7 @@ import { getHints } from "../engine.js";
 export const SET_WORD_TO_FIND = "SET_WORD_TO_FIND";
 export const TYPE = "TYPE";
 export const RESET = "RESET";
+export const CONFIRM = "CONFIRM";
 
 const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
@@ -60,32 +61,31 @@ export const wordsReducer = (state, action) => {
                 state.currentTry.length > 0
             ) {
                 state.currentTry = state.currentTry.slice(0, -1);
-            } else if (
-                action.payload === "enter" &&
-                state.currentTry.length === state.wordLength
-            ) {
-                state.tries.push(state.currentTry);
-                state.hints.push(getHints(state.wordToFind, state.currentTry));
-                for (let i = 0; i < state.hints[state.hints.length - 1].length; i++) {
-                    if (state.hints[state.hints.length - 1][i] === "well-placed") {
-                        state.letterPlacement = state.letterPlacement.split("");
-                        state.letterPlacement[i] = state.wordToFind[i];
-                        state.letterPlacement = state.letterPlacement.join("");
-                    }
-                }
-                if (state.currentTry === state.wordToFind) {
-                    state.won = true;
-                } else if (state.tries.length === 6) {
-                    state.won = false;
-                }
-                console.log(state.won);
-                state.currentTry = "";
             }
 
             return {
                 ...state,
             };
 
+        case CONFIRM:
+            state.tries.push(state.currentTry);
+            state.hints.push(getHints(state.wordToFind, state.currentTry));
+            for (let i = 0; i < state.hints[state.hints.length - 1].length; i++) {
+                if (state.hints[state.hints.length - 1][i] === "well-placed") {
+                    state.letterPlacement = state.letterPlacement.split("");
+                    state.letterPlacement[i] = state.wordToFind[i];
+                    state.letterPlacement = state.letterPlacement.join("");
+                }
+            }
+            if (state.currentTry === state.wordToFind) {
+                state.won = true;
+            } else if (state.tries.length === 6) {
+                state.won = false;
+            }
+            state.currentTry = "";
+            return {
+                ...state,
+            };
         default:
             return state;
     }
