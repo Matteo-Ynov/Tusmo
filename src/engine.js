@@ -57,7 +57,6 @@ function joinCorrectAndMisplacedLetters(
             list.push((input[i], ""));
         }
     }
-    console.log(list);
     return list;
 }
 

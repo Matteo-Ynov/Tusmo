@@ -22,7 +22,6 @@ export const Grid = () => {
         state.currentTry.length === state.wordLength
       ) {
         checkIfWordExist(state.currentTry).then((res) => {
-          console.log(res);
           if (res) {
             dispatch({
               type: CONFIRM,
