@@ -20,6 +20,7 @@ const generateNewState = () => {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .toUpperCase();
+    console.log(choosenWord);
     return {
         wordToFind: choosenWord,
         tries: [],
@@ -27,6 +28,9 @@ const generateNewState = () => {
         currentTry: "",
         letterPlacement: choosenWord[0] + ".".repeat(choosenWord.length - 1),
         wordLength: choosenWord.length,
+        wellPlacedLetters: new Set([choosenWord[0]]),
+        misplacedLetters: new Set([]),
+        missingLetters: new Set([]),
         won: undefined,
     };
 };
@@ -43,7 +47,6 @@ export const wordsReducer = (state, action) => {
                 wordToFind: action.payload,
             };
         case TYPE:
-            console.log(state.wordToFind)
             if (
                 ALPHABET.includes(action.payload) &&
                 state.currentTry.length < state.wordLength
@@ -62,28 +65,39 @@ export const wordsReducer = (state, action) => {
                 state.currentTry.length > 0
             ) {
                 state.currentTry = state.currentTry.slice(0, -1);
-            } else if (
-                action.payload === "enter" &&
-                state.currentTry.length === state.wordLength
-            ) {
-                state.tries.push(state.currentTry);
-                state.hints.push(getHints(state.wordToFind, state.currentTry));
-                for (let i = 0; i < state.hints[state.hints.length - 1].length; i++) {
-                    if (state.hints[state.hints.length - 1][i] === "well-placed") {
-                        state.letterPlacement = state.letterPlacement.split("");
-                        state.letterPlacement[i] = state.wordToFind[i];
-                        state.letterPlacement = state.letterPlacement.join("");
-                    }
-                }
-                if (state.currentTry === state.wordToFind) {
-                    state.won = true;
-                } else if (state.tries.length === 6) {
-                    state.won = false;
-                    
-                }
-                console.log(state.won);
-                state.currentTry = "";
             }
+            // } else if (
+            //     action.payload === "enter" &&
+            //     state.currentTry.length === state.wordLength
+            // ) {
+            //     state.tries.push(state.currentTry);
+            //     var currentHints = getHints(state.wordToFind, state.currentTry);
+            //     for (var i = 0; i < currentHints.length; i++) {
+            //         console.log(currentHints[i]);
+            //         if (currentHints[i] === "well-placed") {
+            //             state.wellPlacedLetters.add(state.currentTry[i]);
+            //         } else if (currentHints[i] === "misplaced") {
+            //             state.misplacedLetters.add(state.currentTry[i]);
+            //         } else if (currentHints[i] === "missing") {
+            //             state.missingLetters.add(state.currentTry[i]);
+            //         }
+            //     }
+
+            //     state.hints.push(currentHints);
+            //     for (let i = 0; i < state.hints[state.hints.length - 1].length; i++) {
+            //         if (state.hints[state.hints.length - 1][i] === "well-placed") {
+            //             state.letterPlacement = state.letterPlacement.split("");
+            //             state.letterPlacement[i] = state.wordToFind[i];
+            //             state.letterPlacement = state.letterPlacement.join("");
+            //         }
+            //     }
+            //     if (state.currentTry === state.wordToFind) {
+            //         state.won = true;
+            //     } else if (state.tries.length === 6) {
+            //         state.won = false;
+            //     }
+            //     state.currentTry = "";
+            // }
 
             return {
                 ...state,
@@ -91,7 +105,18 @@ export const wordsReducer = (state, action) => {
 
         case CONFIRM:
             state.tries.push(state.currentTry);
-            state.hints.push(getHints(state.wordToFind, state.currentTry));
+            var currentHints = getHints(state.wordToFind, state.currentTry);
+            for (var i = 0; i < currentHints.length; i++) {
+                if (currentHints[i] === "well-placed") {
+                    state.wellPlacedLetters.add(state.currentTry[i]);
+                } else if (currentHints[i] === "misplaced") {
+                    state.misplacedLetters.add(state.currentTry[i]);
+                } else if (currentHints[i] === "") {
+                    state.missingLetters.add(state.currentTry[i]);
+                }
+            }
+            console.log(state);
+            state.hints.push(currentHints);
             for (let i = 0; i < state.hints[state.hints.length - 1].length; i++) {
                 if (state.hints[state.hints.length - 1][i] === "well-placed") {
                     state.letterPlacement = state.letterPlacement.split("");
@@ -101,10 +126,10 @@ export const wordsReducer = (state, action) => {
             }
             if (state.currentTry === state.wordToFind) {
                 state.won = true;
-                update_local_storage(state.won, state.tries.length)
+                update_local_storage(state.won, state.tries.length);
             } else if (state.tries.length === 6) {
                 state.won = false;
-                update_local_storage(state.won, state.tries.length)
+                update_local_storage(state.won, state.tries.length);
             }
             state.currentTry = "";
             return {
@@ -115,14 +140,25 @@ export const wordsReducer = (state, action) => {
     }
 };
 
-
-function update_local_storage(won, length_tried){
-    console.log(won)
-    if (won===true){
-        localStorage.setItem("streak", parseInt(localStorage.getItem("streak")) + 1);
+function update_local_storage(won, length_tried) {
+    console.log(won);
+    if (won === true) {
+        localStorage.setItem(
+            "streak",
+            parseInt(localStorage.getItem("streak")) + 1
+        );
         localStorage.setItem("found", parseInt(localStorage.getItem("found")) + 1);
     }
     localStorage.setItem("tried", parseInt(localStorage.getItem("tried")) + 1);
-    localStorage.setItem("word_tried", parseInt(localStorage.getItem("word_tried")) + length_tried);
-    localStorage.setItem("average", (parseInt(localStorage.getItem("word_tried")) / parseInt(localStorage.getItem("tried"))).toFixed(1));
+    localStorage.setItem(
+        "word_tried",
+        parseInt(localStorage.getItem("word_tried")) + length_tried
+    );
+    localStorage.setItem(
+        "average",
+        (
+            parseInt(localStorage.getItem("word_tried")) /
+            parseInt(localStorage.getItem("tried"))
+        ).toFixed(1)
+    );
 }

@@ -6,6 +6,7 @@ import { TYPE, CONFIRM } from "../states/wordsReducer";
 
 import WinPanel from "../components/winPanel";
 import LosePanel from "../components/losePanel";
+import Keyboard from "./keyboard";
 
 import { checkIfWordExist } from "../engine";
 
@@ -51,23 +52,26 @@ export const Grid = () => {
     return <LosePanel />;
   } else {
     return (
-      <div className="grid">
-        {Array(6)
-          .fill(1)
-          .map((_, i) => {
-            return (
-              <Row
-                word={
-                  state.tries[i]
-                    ? state.tries[i]
-                    : " ".repeat(state.wordToFind.length)
-                }
-                key={i}
-                id={i}
-              />
-            );
-          })}
-      </div>
+      <>
+        <div className="grid">
+          {Array(6)
+            .fill(1)
+            .map((_, i) => {
+              return (
+                <Row
+                  word={
+                    state.tries[i]
+                      ? state.tries[i]
+                      : " ".repeat(state.wordToFind.length)
+                  }
+                  key={i}
+                  id={i}
+                />
+              );
+            })}
+        </div>
+        <Keyboard />
+      </>
     );
   }
 };
