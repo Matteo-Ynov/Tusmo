@@ -67,14 +67,14 @@ export const checkIfWordExist = (input) => {
             .then((text) => {
                 resolve(
                     text
-                    .split("\n")
-                    .map((word) =>
-                        word
-                        .normalize("NFD")
-                        .replace(/[\u0300-\u036f]/g, "")
-                        .toUpperCase()
-                    )
-                    .includes(input.toUpperCase())
+                        .split("\n")
+                        .map((word) =>
+                            word
+                                .normalize("NFD")
+                                .replace(/[\u0300-\u036f]/g, "")
+                                .toUpperCase()
+                        )
+                        .includes(input.toUpperCase())
                 );
             });
     });
@@ -83,17 +83,17 @@ export const checkIfWordExist = (input) => {
 export function createhintsarray(hints) {
     let hintsarray = [];
     for (const hint of hints) {
-        let show = "";
+        let show = ""
         for (const value of hint) {
             if (value === "well-placed") {
-                show += "🟥";
-            } else if ((value = "misplaced")) {
-                show += "🟠";
+                show += "🟥"
+            } else if (value === "misplaced") {
+                show += "🟠"
             } else {
-                show += "⚫";
+                show += "⚫"
             }
+            hintsarray.push(show);
         }
-        hintsarray.push(show);
+        return hintsarray;
     }
-    return hintsarray;
 }

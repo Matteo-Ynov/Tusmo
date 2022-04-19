@@ -5,6 +5,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { createhintsarray } from "../engine";
 
 const LosePanel = () => {
+  localStorage.setItem("streak", 0);
   const [state] = useContext(SutomContext);
   let hintsarray = createhintsarray(state.hints);
   return (
