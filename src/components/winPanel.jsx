@@ -11,13 +11,13 @@ const WinPanel = () => {
     <div className="panel">
       <h1 className="end-game-state">V I C T O I R E</h1>
       <CopyToClipboard text={hintsarray.join("\n")}>
-          <button class="btn btn-white btn-small">Copier dans le presse-papier</button>
+          <button className="btn btn-white btn-small">Copier dans le presse-papier</button>
         </CopyToClipboard>
       <h1 className="tries">{
         hintsarray.map(e => <p className="try">{e}</p>)
       }</h1>
       <Link
-        class="btn btn-white btn-big"
+        className="btn btn-white btn-big"
         onClick={() => window.location.reload()}
         to="/game"
       >

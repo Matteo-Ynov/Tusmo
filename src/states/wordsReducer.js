@@ -43,6 +43,7 @@ export const wordsReducer = (state, action) => {
                 wordToFind: action.payload,
             };
         case TYPE:
+            console.log(state.wordToFind)
             if (
                 ALPHABET.includes(action.payload) &&
                 state.currentTry.length < state.wordLength
@@ -76,10 +77,9 @@ export const wordsReducer = (state, action) => {
                 }
                 if (state.currentTry === state.wordToFind) {
                     state.won = true;
-                    update_local_storage(state.won, state.tries.length)
                 } else if (state.tries.length === 6) {
                     state.won = false;
-                    update_local_storage(state.won, state.tries.length)
+                    
                 }
                 console.log(state.won);
                 state.currentTry = "";
@@ -101,8 +101,10 @@ export const wordsReducer = (state, action) => {
             }
             if (state.currentTry === state.wordToFind) {
                 state.won = true;
+                update_local_storage(state.won, state.tries.length)
             } else if (state.tries.length === 6) {
                 state.won = false;
+                update_local_storage(state.won, state.tries.length)
             }
             state.currentTry = "";
             return {
@@ -115,6 +117,7 @@ export const wordsReducer = (state, action) => {
 
 
 function update_local_storage(won, length_tried){
+    console.log(won)
     if (won===true){
         localStorage.setItem("streak", parseInt(localStorage.getItem("streak")) + 1);
         localStorage.setItem("found", parseInt(localStorage.getItem("found")) + 1);

@@ -92,8 +92,8 @@ export function createhintsarray(hints) {
             } else {
                 show += "⚫"
             }
-            hintsarray.push(show);
         }
-        return hintsarray;
+        hintsarray.push(show);
     }
+    return hintsarray;
 }

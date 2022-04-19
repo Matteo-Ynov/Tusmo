@@ -13,7 +13,7 @@ const LosePanel = () => {
       <h1 className="end-game-state">G A M E   O V E R</h1>
       <h3>LE MOT A TROUVER ETAIT {state.wordToFind}</h3>
       <CopyToClipboard text={hintsarray.join("\n")}>
-        <button class="btn btn-white btn-small">
+        <button className="btn btn-white btn-small">
           Copier dans le presse-papier
         </button>
       </CopyToClipboard>
@@ -23,7 +23,7 @@ const LosePanel = () => {
         ))}
       </h1>
       <Link
-        class="btn btn-white btn-big"
+        className="btn btn-white btn-big"
         onClick={() => window.location.reload()}
         to="/game"
       >
