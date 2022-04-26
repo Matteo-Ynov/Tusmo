@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "Commuter Sans";
+    src: url("assets/commuter-sans-light.otf") format("opentype");
+}
+
+body {
+    font-family: "Commuter Sans";
+}
+
+.display-none {
+    display: none;
+}
