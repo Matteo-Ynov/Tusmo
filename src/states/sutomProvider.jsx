@@ -5,7 +5,6 @@ export const SutomContext = createContext(null);
 
 const SutomProvider = ({ children }) => {
   const [state, dispatch] = useReducer(wordsReducer, initialState);
-
   return (
     <SutomContext.Provider value={[state, dispatch]}>
       {children}

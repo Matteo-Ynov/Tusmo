@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { SutomContext } from "../states/sutomProvider";
+import { TYPE } from "../states/wordsReducer";
+import { useEffect } from "react";
 
 const Keyboard = () => {
   const ALPHABET = [
@@ -8,8 +10,12 @@ const Keyboard = () => {
     ["W", "X", "C", "V", "B", "N", "M"],
   ];
   const [state, dispatch] = useContext(SutomContext);
-
-  //   console.log(state.wellPlacedLetters);
+  useEffect(() => {
+    let key = document.getElementsByClassName("key")
+    for (var i = 0; i < key.length; i++) {
+      key[i].onclick = function (event) { dispatch({ type: TYPE, payload: event.target.innerHTML.toLowerCase(), click: true }); }
+    }
+  });
   return (
     <div className="keyboard">
       {ALPHABET.map((l) => {
@@ -17,20 +23,20 @@ const Keyboard = () => {
           <div className="key-row" key={l}>
             {l.map((c) => {
               return (
-                <div
+                <button className="key"><div
                   className={
                     state.missingLetters.has(c)
                       ? "missing"
                       : state.misplacedLetters.has(c)
-                      ? "misplaced-keyboard"
-                      : state.wellPlacedLetters.has(c)
-                      ? "well-placed"
-                      : ""
+                        ? "misplaced-keyboard"
+                        : state.wellPlacedLetters.has(c)
+                          ? "well-placed"
+                          : ""
                   }
                   key={c}
                 >
                   {c}
-                </div>
+                </div></button>
               );
             })}
           </div>
@@ -39,5 +45,6 @@ const Keyboard = () => {
     </div>
   );
 };
+
 
 export default Keyboard;

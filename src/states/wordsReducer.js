@@ -47,58 +47,16 @@ export const wordsReducer = (state, action) => {
                 wordToFind: action.payload,
             };
         case TYPE:
-            if (
-                ALPHABET.includes(action.payload) &&
-                state.currentTry.length < state.wordLength
-            ) {
-                if (
-                    state.currentTry.length === 0 &&
-                    action.payload.toUpperCase() !== state.wordToFind[0]
-                ) {
+            if (ALPHABET.includes(action.payload) && state.currentTry.length < state.wordLength) {
+                if (state.currentTry.length === 0 && action.payload.toUpperCase() !== state.wordToFind[0]) {
                     state.currentTry += state.wordToFind[0];
                     state.currentTry += action.payload.toUpperCase();
                 } else {
                     state.currentTry += action.payload.toUpperCase();
                 }
-            } else if (
-                action.payload === "backspace" &&
-                state.currentTry.length > 0
-            ) {
+            } else if (action.payload === "backspace" && state.currentTry.length > 0) {
                 state.currentTry = state.currentTry.slice(0, -1);
             }
-            // } else if (
-            //     action.payload === "enter" &&
-            //     state.currentTry.length === state.wordLength
-            // ) {
-            //     state.tries.push(state.currentTry);
-            //     var currentHints = getHints(state.wordToFind, state.currentTry);
-            //     for (var i = 0; i < currentHints.length; i++) {
-            //         console.log(currentHints[i]);
-            //         if (currentHints[i] === "well-placed") {
-            //             state.wellPlacedLetters.add(state.currentTry[i]);
-            //         } else if (currentHints[i] === "misplaced") {
-            //             state.misplacedLetters.add(state.currentTry[i]);
-            //         } else if (currentHints[i] === "missing") {
-            //             state.missingLetters.add(state.currentTry[i]);
-            //         }
-            //     }
-
-            //     state.hints.push(currentHints);
-            //     for (let i = 0; i < state.hints[state.hints.length - 1].length; i++) {
-            //         if (state.hints[state.hints.length - 1][i] === "well-placed") {
-            //             state.letterPlacement = state.letterPlacement.split("");
-            //             state.letterPlacement[i] = state.wordToFind[i];
-            //             state.letterPlacement = state.letterPlacement.join("");
-            //         }
-            //     }
-            //     if (state.currentTry === state.wordToFind) {
-            //         state.won = true;
-            //     } else if (state.tries.length === 6) {
-            //         state.won = false;
-            //     }
-            //     state.currentTry = "";
-            // }
-
             return {
                 ...state,
             };
@@ -115,7 +73,6 @@ export const wordsReducer = (state, action) => {
                     state.missingLetters.add(state.currentTry[i]);
                 }
             }
-            console.log(state);
             state.hints.push(currentHints);
             for (let i = 0; i < state.hints[state.hints.length - 1].length; i++) {
                 if (state.hints[state.hints.length - 1][i] === "well-placed") {

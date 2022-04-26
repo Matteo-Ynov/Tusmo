@@ -54,3 +54,13 @@
     height: 100%;
     color: white;
 }
+
+.error{
+	color: white;
+    text-align: center;
+    transition: all 1s;
+}
+
+.hide{
+    opacity: 0;
+}
