@@ -2,7 +2,7 @@
     "name": "tusmo",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://Matteo-Ynov.github.io/Tusmo",
+    "homepage": "https://matteo-ynov.github.io/Tusmo/",
     "dependencies": {
         "@testing-library/jest-dom": "^5.16.2",
         "@testing-library/react": "^12.1.3",
