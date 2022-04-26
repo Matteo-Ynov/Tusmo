@@ -1,0 +1,28 @@
+.stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+h1 {
+    color: white;
+}
+
+.tries{
+  text-align: center;
+}
+
+.try{
+  margin: 0;
+}
+
+.end-game-state{
+  font-size: 60px;
+}
+
+.number{
+  font-family: sans-serif;
+  font-size: 25px;
+}
